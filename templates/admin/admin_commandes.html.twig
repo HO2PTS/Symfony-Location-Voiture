@@ -1,0 +1,71 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+BackOffice
+{% endblock %}
+
+{% block body %}
+<table class="table table-bordered text-center container mt-4">
+    <thead>
+        <tr>
+            <th> Numéro de commande </th>
+            <th> Membre </th>
+            <th> Vehicule </th>
+            <th> Date de la commande </th>
+            <th> Date d'arrivée de la commande </th>
+            <th> Prix Total </th>
+            <th> Date Enregistrement </th>
+            <th> Editer </th>
+            <th> Supprimer </th>
+            <th> En Savoir Plus </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+    {% for commande in commandes %}
+        <tr>
+            <td> {{ commande.id }} </td>
+            <td> {{ commande.idmembre.id }} - {{ commande.idmembre.prenom }} {{ commande.idmembre.nom }} - {{ commande.idmembre.email }} </td>
+            <td> {{ commande.idvehicule.id }} - {{ commande.idvehicule.marque }} {{ commande.idvehicule.modele }} </td>
+            <td> {{ commande.dateheuredepart| date("d/m/Y - H:i:s")}} </td>
+            <td> {{ commande.dateheurefin| date("d/m/Y - H:i:s")}} </td>
+            <td> {{ commande.prixtotal}} €</td>
+            <td> {{ commande.dateenregistrement| date("d/m/Y à H:i:s") }} </td>
+            <td><a href="{{ path('admin_edit_commande', {
+                id: commande.id
+            }) }}" class="text-dark"><i class="fas fa-edit"></i></a></td>
+            <td><a onclick="return confirm('voulez-vous supprimer ce commande?')" href="" class="text-dark"><i class="fas fa-trash"></i></a></td>
+            <td><a href=" {{ path('admin_show', {
+                id: commande.id
+            }) }}" class="text-dark"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if editMode %}
+
+<div class="container">
+{{form_start(form, {
+    attr: {
+        novalidate: 'novalidate'
+    }
+}) }}
+
+{{ form_row(form.date_heure_depart) }}
+{{ form_row(form.date_heure_fin)}}
+{{ form_row(form.prix_total) }}
+{{ form_row(form.id_membre)}}
+{{ form_row(form.id_vehicule)}}
+
+
+
+
+<button type="submit" class="btn btn-success mt-2">
+
+    Enregistrer les modifications
+
+
+</button>
+{{form_end(form)}}
+{% endif %}
+{% endblock %}

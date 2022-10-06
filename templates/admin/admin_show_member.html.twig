@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} BackOffice {% endblock %}
+
+{% block body %}
+
+
+<div class="text-center accordion m-5" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="text-center accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      Membre : {{ member.pseudo }}
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <p> <h2>USER INFO !</h2> <br> Prénom : {{ member.prenom }} <br> Nom : {{ member.nom }} <br> Email :  {{ member.email }} <br> Civilité : {{ member.civilite }} </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

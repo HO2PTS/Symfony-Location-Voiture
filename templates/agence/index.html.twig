@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+{# <table class="table table-bordered container mt-3"> #}
+{# 
+<thead>
+    <tr>
+        <th> Titre </th>
+        <th> Marque  </th>
+        <th> Descrition  </th>
+        <th> Photo </th>
+        <th> Prix Journalier </th>
+        <th> Date Enregistrment </th>
+        <th> Modèle </th>
+        <th> Action </th>
+    </tr>
+</thead>
+
+<tbody>
+    {% for item in vehicules %}
+        <tr>
+            <td> {{ item.title }} </td>
+            <td> {{ item.marque }} </td>
+            <td> {{ item.description }} </td>
+            <td> <img src="{{ item.photo}}" style="width: 150px"></td>
+            <td> {{ item.prixjournalier }} €</td>
+            <td> {{ item.dateenregistrement|date('d/m/Y à H:i:s') }} </td>
+            <td> {{ item.modele }} </td>
+            <td> <a href=" {{ path('admin_edit_vehicule', {
+                id: item.id
+            }) }} " class="text-dark"> Commander</a> </td>
+    {% endfor %}
+</tbody>
+</table> #}
+
+<div class="container mt-4 d-flex justify-content-evenly"> 
+{% for item in vehicules %}
+<div class="card text-dark bg-primary mb-3 mr-4 bg-secondary"
+style="max-width: 20rem;">
+  <div class="card-header text-center"> {{ item.title }} </div>
+  <div class="card-body text-center">
+    <h4 class="card-title"> {{ item.marque }} </h4>
+    <img class="text-center" src="{{ item.photo }}" alt="" width="200px">
+    <p class="card-text"> {{ item.description }} </p>
+    <hr>
+    <p>Prix Journalier : {{ item.prixjournalier }} €</p>
+    {% if app.user %} 
+        <a href=" {{ path('show', {
+        id: item.id
+    }) }} " class="btn btn-info"> En Savoir Plus</a>
+    {% else %}
+        <a href="{{ path('app_login') }}" class="btn btn-secondary"> Connecter-Vous ! </a>
+    {% endif %}
+    
+  </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

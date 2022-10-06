@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BlogController!{% endblock %}
+
+{% block body %}
+<div class="card mb-3 m-5">
+  <h3 class="card-header"> {{ item.title }} </h3>
+  <h4 class="card-title text-center"> {{ item.marque }}</h4>
+  <div class="card-body text-center">
+    <h5 class="card-title"> Modèle : {{ item.modele }}</h5>
+    <h5 class="card-title"> Prix Journalier {{ item.prixjournalier }} € </h5>
+    <p>  </p>
+  </div>
+  <div class="text-center">
+    <img src="{{ item.photo }}" alt="" width="50%" height="50%">
+  </div>
+  <div class="card-body">
+  <p class="card-header"> Description : </p>
+    <p class="card-text"> {{ item.description }} </p>
+  </div>
+  <hr>
+  <div class="card-body text-center">
+  <h5> Choissiez les dates de commandes </h5>
+  {{form_start(form, {
+    attr: {
+        novalidate: 'novalidate'
+    }
+})}}
+
+{{ form_row(form.date_heure_depart) }}
+
+{{ form_row(form.date_heure_fin) }}
+    <button type="submit" class="btn btn-success"> Commander </button>
+  </div>
+  <div class="card-footer text-muted text-center">
+    L'annonce a été émis le {{ item.dateenregistrement|date("d/m/Y à H:i:s") }})=
+  </div>
+</div>
+
+
+{{form_end(form)}}
+{% endblock %}

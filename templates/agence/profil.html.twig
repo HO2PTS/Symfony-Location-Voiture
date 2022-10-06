@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+<h1 class='text-center mt-4'> Bienvenue sur votre page </h1>
+<hr>
+<h3 class='text-center'> Vos Informations </h3>
+
+<div class="mx-auto col-6 mt-4"> 
+<div class="card text-dark bg-primary mb-3 mr-4 bg-secondary container-fluid"
+style="max-width: 20rem;">
+  <div class="card-header text-center"> PSEUDO : {{ app.user.pseudo }} </div>
+  <div class="card-body text-center">
+    <h4 class="card-title"> Prénom : {{ app.user.prenom }} </h4>
+    <h4 class="card-title"> Nom : {{ app.user.nom }} </h4>
+    <p class="card-text"> Email : {{ app.user.email }} </p>
+    <p class="card-text"> Civilité : {{ app.user.civilite }} </p>
+  </div>
+</div>
+</div>
+<br>
+<hr>
+<h3 class='text-center'> Vos Commandes </h3>
+
+{% for commande in commandes %}
+{% if commande.idmembre.id == app.user.id %}
+
+    <div class="card border-success mx-auto mb-3" style="max-width: 80vw;">
+    <div class="container">
+        <div class="card-header"><h3>Commande du {{commande.dateEnregistrement|date("d/m/y à H:i:s")}}</h3></div>
+        <div class="card-body">
+            <h4 class="card-title">{{commande.idmembre.pseudo}} / {{commande.idvehicule.title}}</h4>
+            <p class="card-text">
+                -heure de départ : {{ commande.dateheuredepart|date("d/m/y à H:i:s") }}<br>
+                -heure de retour : {{ commande.dateheurefin|date("d/m/y à H:i:s") }}<br>
+                <h5>Prix Total : {{ commande.prixtotal }}€</h5>               
+            </p>
+        </div>
+    </div>
+    </div>
+
+
+{% endif %}
+{% endfor %}
+{% endblock %}
