@@ -1,3 +1,16 @@
 {
-    "sqltools.connections": []
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "askForPassword": true,
+            "driver": "MySQL",
+            "connectString": "mysql://xazjd73ynewo3z9f:clyqcfewmrr5hhzw@ltnya0pnki2ck9w8.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/fs6xog0xo8q8kz08",
+            "name": "doranco"
+        }
+    ]
 }
